@@ -17,6 +17,31 @@ import pricingData from "@/data/llm-pricing.json";
 type SortDirection = "asc" | "desc" | null;
 type SortField = "monthly" | "quarterly" | "yearly" | null;
 
+// Plan data from JSON (may not have optional fields)
+interface RawPlanData {
+  name: string;
+  monthly: number;
+  quarterly: number | null;
+  yearly: number | null;
+  tokens: string;
+  description: string;
+  firstDiscount?: string;
+  originalQuarterly?: number;
+}
+
+interface ProviderData {
+  id: string;
+  name: string;
+  category: string;
+  website: string;
+  plans?: RawPlanData[];
+}
+
+interface PricingData {
+  lastUpdated: string;
+  providers: ProviderData[];
+}
+
 interface PlanEntry {
   provider: string;
   providerId: string;
@@ -41,7 +66,8 @@ export default function LLMPriceComparison() {
   // Flatten plan data
   const planEntries: PlanEntry[] = useMemo(() => {
     const result: PlanEntry[] = [];
-    pricingData.providers.forEach((provider) => {
+    const data = pricingData as PricingData;
+    data.providers.forEach((provider) => {
       if (provider.plans) {
         provider.plans.forEach((plan) => {
           result.push({
@@ -251,50 +277,51 @@ export default function LLMPriceComparison() {
       {/* Plans Grid */}
       {filteredPlans.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {sortedPlans.map((entry) => (
-            <Card key={`${entry.providerId}-${entry.planName}`} className="hover:shadow-md transition-shadow">
+          {sortedPlans.map((plan) => (
+            <Card key={`${plan.providerId}-${plan.planName}`} className="hover:shadow-md transition-shadow">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-semibold">{entry.provider}</span>
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(entry.category)}`}>
-                    {entry.category}
+                  <span className="font-semibold">{plan.provider}</span>
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(plan.category)}`}>
+                    {plan.category}
                   </span>
                 </div>
-                <div className="text-lg font-bold mb-2">{entry.planName}</div>
-                <div className="text-sm text-muted-foreground mb-4">{entry.description}</div>
+                <div className="text-lg font-bold mb-2">{plan.planName}</div>
+                <div className="text-sm text-muted-foreground mb-4">{plan.description}</div>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
                     <span className="text-sm text-muted-foreground">包月</span>
-                    <span className="font-mono font-medium">{formatCurrency(entry.monthly)}</span>
+                    <span className="font-mono font-medium">{formatCurrency(plan.monthly)}</span>
                   </div>
                   <div className="flex justify-between items-center p-2 bg-muted/50 rounded relative">
                     <span className="text-sm text-muted-foreground">包季</span>
                     <div className="flex items-center gap-2">
-                      {entry.firstDiscount && (
-                        <span className="text-xs text-red-500 font-medium">{entry.firstDiscount}</span>
+                      {plan.firstDiscount && (
+                        <span className="text-xs text-red-500 font-medium">{plan.firstDiscount}</span>
                       )}
                       <span className="font-mono font-medium">
-                        {entry.quarterly ? formatCurrency(entry.quarterly) : '-'}
+                        {plan.quarterly ? formatCurrency(plan.quarterly) : '-'}
                       </span>
                     </div>
                   </div>
                   <div className="flex justify-between items-center p-2 bg-green-50 dark:bg-green-950/30 rounded border border-green-100 dark:border-green-800">
                     <span className="text-sm text-green-700 dark:text-green-300 font-medium">包年</span>
                     <span className="font-mono font-bold text-green-600 dark:text-green-400">
-                      {entry.yearly ? formatCurrency(entry.yearly) : '-'}
+                      {plan.yearly ? formatCurrency(plan.yearly) : '-'}
                     </span>
                   </div>
                 </div>
-                {entry.firstDiscount && (
+                {plan.firstDiscount && (
                   <div className="mb-3 px-2 py-1 bg-red-50 dark:bg-red-950/30 rounded text-xs text-red-600 dark:text-red-400 font-medium">
-                    特惠：{entry.firstDiscount}（原价 {formatCurrency(entry.originalQuarterly)}/季）
+                    特惠：{plan.firstDiscount}
+                    {plan.originalQuarterly && `（原价 ${formatCurrency(plan.originalQuarterly)}/季）`}
                   </div>
                 )}
                 <div className="text-xs text-muted-foreground mb-4">
-                  权益：{entry.tokens}
+                  权益：{plan.tokens}
                 </div>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href={entry.website} target="_blank" rel="noopener noreferrer">
+                  <a href={plan.website} target="_blank" rel="noopener noreferrer">
                     了解详情
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
