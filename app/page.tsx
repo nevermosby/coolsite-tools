@@ -6,6 +6,7 @@ import {
   FileText,
   Binary,
   ArrowRight,
+  Globe,
 } from "lucide-react";
 import {
   Card,
@@ -17,6 +18,13 @@ import {
 import { Button } from "@/components/ui/button";
 
 const tools = [
+  {
+    title: "网络和 IP 地址计算器",
+    description: "CIDR、子网掩码、IP 地址段等计算。",
+    href: "/tools/ip-calculator",
+    icon: Globe,
+    color: "text-amber-500",
+  },
   {
     title: "JSON 格式化",
     description: "美化、压缩和校验 JSON 数据，支持语法高亮。",
@@ -66,7 +74,6 @@ export default function Home() {
         </h1>
         <p className="max-w-[750px] text-lg text-muted-foreground sm:text-xl">
           无需下载安装，所有工具均在浏览器本地运行，保护您的隐私安全。
-          提供 JSON 格式化、图片转换、密码生成等多种功能。
         </p>
       </section>
 
