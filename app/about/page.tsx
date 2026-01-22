@@ -40,8 +40,7 @@ export default function AboutPage() {
                     如果您在使用过程中发现 Bug，或者有新工具的建议，欢迎通过以下方式联系我们：
                 </p>
                 <ul>
-                    <li>Email: support@example.com</li>
-                    <li>GitHub Issue: <a href="https://github.com/your-repo/issues" target="_blank" rel="noreferrer">提交反馈</a></li>
+                    <li>GitHub Issue: <a href="https://github.com/nevermosby/coolsite-tools/issues" target="_blank" rel="noreferrer">提交反馈</a></li>
                 </ul>
             </div>
         </div>

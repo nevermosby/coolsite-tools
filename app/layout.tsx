@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
@@ -55,7 +56,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col font-sans`}
       >
         {/* GA 路由监听（必须在 body 中） */}
-        <GoogleTagListener />
+        <Suspense fallback={null}>
+          <GoogleTagListener />
+        </Suspense>
 
         <Header />
 
