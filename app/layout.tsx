@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 const GTAG_ID = process.env.NEXT_PUBLIC_GTAG_ID!;
+const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID!;
 
 export default function RootLayout({
   children,
@@ -34,6 +35,12 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <head>
+        {/* Google AdSense */}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+        />
         {/* Google tag */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}
