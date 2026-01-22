@@ -1,0 +1,489 @@
+{
+  "lastUpdated": "2025-01-22",
+  "providers": [
+    {
+      "id": "baidu",
+      "name": "百度文心一言",
+      "category": "头部厂商",
+      "website": "https://yiyan.baidu.com",
+      "models": [
+        {
+          "name": "ERNIE-4.5-Turbo",
+          "inputPrice": 0.016,
+          "outputPrice": 0.064,
+          "unit": "千tokens"
+        },
+        {
+          "name": "ERNIE-4.0-Turbo",
+          "inputPrice": 0.02,
+          "outputPrice": 0.06,
+          "unit": "千tokens"
+        },
+        {
+          "name": "ERNIE-3.5-8K",
+          "inputPrice": 0.005,
+          "outputPrice": 0.01,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "基础版",
+          "monthly": 99,
+          "quarterly": 267,
+          "yearly": 948,
+          "tokens": "500万tokens/月",
+          "description": "适合个人开发者日常使用"
+        },
+        {
+          "name": "专业版",
+          "monthly": 399,
+          "quarterly": 1077,
+          "yearly": 3828,
+          "tokens": "5000万tokens/月",
+          "description": "适合团队协作和中等并发"
+        },
+        {
+          "name": "企业版",
+          "monthly": 1999,
+          "quarterly": 5397,
+          "yearly": 19188,
+          "tokens": "5亿tokens/月",
+          "description": "适合企业级大规模应用"
+        }
+      ]
+    },
+    {
+      "id": "alibaba",
+      "name": "阿里通义千问",
+      "category": "头部厂商",
+      "website": "https://tongyi.aliyun.com",
+      "models": [
+        {
+          "name": "Qwen-Max",
+          "inputPrice": 0.02,
+          "outputPrice": 0.06,
+          "unit": "千tokens"
+        },
+        {
+          "name": "Qwen-Plus",
+          "inputPrice": 0.004,
+          "outputPrice": 0.012,
+          "unit": "千tokens"
+        },
+        {
+          "name": "Qwen-Turbo",
+          "inputPrice": 0.002,
+          "outputPrice": 0.006,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "基础包",
+          "monthly": 120,
+          "quarterly": 324,
+          "yearly": 1152,
+          "tokens": "100万tokens/月",
+          "description": "入门体验，适合轻度使用"
+        },
+        {
+          "name": "进阶包",
+          "monthly": 500,
+          "quarterly": 1350,
+          "yearly": 4800,
+          "tokens": "1000万tokens/月",
+          "description": "平衡性价比，适合日常开发"
+        },
+        {
+          "name": "高级包",
+          "monthly": 2000,
+          "quarterly": 5400,
+          "yearly": 19200,
+          "tokens": "1亿tokens/月",
+          "description": "高并发，适合企业应用"
+        }
+      ]
+    },
+    {
+      "id": "tencent",
+      "name": "腾讯混元",
+      "category": "头部厂商",
+      "website": "https://hunyuan.tencent.com",
+      "models": [
+        {
+          "name": "Hunyuan-A",
+          "inputPrice": 0.015,
+          "outputPrice": 0.05,
+          "unit": "千tokens"
+        },
+        {
+          "name": "Hunyuan-Pro",
+          "inputPrice": 0.01,
+          "outputPrice": 0.03,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "个人版",
+          "monthly": 89,
+          "quarterly": 240,
+          "yearly": 854,
+          "tokens": "100万tokens/月",
+          "description": "个人开发者首选"
+        },
+        {
+          "name": "团队版",
+          "monthly": 359,
+          "quarterly": 969,
+          "yearly": 3446,
+          "tokens": "1000万tokens/月",
+          "description": "团队协作，高性价比"
+        },
+        {
+          "name": "企业版",
+          "monthly": 1799,
+          "quarterly": 4857,
+          "yearly": 17270,
+          "tokens": "1亿tokens/月",
+          "description": "企业级服务保障"
+        }
+      ]
+    },
+    {
+      "id": "byteDance",
+      "name": "字节豆包",
+      "category": "头部厂商",
+      "website": "https://www.volcengine.com/product/doubao",
+      "models": [
+        {
+          "name": "Doubao-Pro-32K",
+          "inputPrice": 0.0005,
+          "outputPrice": 0.001,
+          "unit": "千tokens"
+        },
+        {
+          "name": "Doubao-Pro-128K",
+          "inputPrice": 0.001,
+          "outputPrice": 0.002,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "入门包",
+          "monthly": 39,
+          "quarterly": 105,
+          "yearly": 374,
+          "tokens": "200万tokens/月",
+          "description": "低价入门，体验大模型"
+        },
+        {
+          "name": "标准包",
+          "monthly": 149,
+          "quarterly": 402,
+          "yearly": 1430,
+          "tokens": "2000万tokens/月",
+          "description": "性价比之选"
+        },
+        {
+          "name": "高级包",
+          "monthly": 599,
+          "quarterly": 1617,
+          "yearly": 5749,
+          "tokens": "1亿tokens/月",
+          "description": "大量调用场景"
+        }
+      ]
+    },
+    {
+      "id": "zhipu",
+      "name": "智谱 AI",
+      "category": "头部厂商",
+      "website": "https://open.bigmodel.cn",
+      "models": [
+        {
+          "name": "GLM-4",
+          "inputPrice": 0.1,
+          "outputPrice": 0.1,
+          "unit": "百万tokens"
+        },
+        {
+          "name": "GLM-4V",
+          "inputPrice": 0.1,
+          "outputPrice": 0.1,
+          "unit": "百万tokens"
+        },
+        {
+          "name": "GLM-3-Turbo",
+          "inputPrice": 0.005,
+          "outputPrice": 0.005,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "Lite",
+          "monthly": 40,
+          "quarterly": 120,
+          "yearly": 950,
+          "tokens": "50万tokens/月",
+          "description": "轻量级编程，适合个人开发者",
+          "firstDiscount": "首季¥54",
+          "originalQuarterly": 120
+        },
+        {
+          "name": "Pro",
+          "monthly": 200,
+          "quarterly": 600,
+          "yearly": 3830,
+          "tokens": "500万tokens/月",
+          "description": "复杂编程，专业开发场景",
+          "firstDiscount": "首季¥270",
+          "originalQuarterly": 600
+        },
+        {
+          "name": "Max",
+          "monthly": 400,
+          "quarterly": 1200,
+          "yearly": 15350,
+          "tokens": "5000万tokens/月",
+          "description": "海量编程，企业级应用",
+          "firstDiscount": "首季¥540",
+          "originalQuarterly": 1200
+        }
+      ]
+    },
+    {
+      "id": "moonshot",
+      "name": "月之暗面 Kimi",
+      "category": "新锐公司",
+      "website": "https://www.moonshot.cn",
+      "models": [
+        {
+          "name": "Kimi-Vision",
+          "inputPrice": 0.02,
+          "outputPrice": 0.06,
+          "unit": "千tokens"
+        },
+        {
+          "name": "Kimi-200K",
+          "inputPrice": 0.012,
+          "outputPrice": 0.012,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "基础版",
+          "monthly": 69,
+          "quarterly": 186,
+          "yearly": 662,
+          "tokens": "100万tokens/月",
+          "description": "体验 Kimi 长文本能力"
+        },
+        {
+          "name": "进阶版",
+          "monthly": 199,
+          "quarterly": 537,
+          "yearly": 1910,
+          "tokens": "500万tokens/月",
+          "description": "日常使用，高性价比"
+        },
+        {
+          "name": "专业版",
+          "monthly": 599,
+          "quarterly": 1617,
+          "yearly": 5749,
+          "tokens": "5000万tokens/月",
+          "description": "重度使用，专业场景"
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "category": "新锐公司",
+      "website": "https://www.minimaxi.com",
+      "models": [
+        {
+          "name": "ABAB-6.5s",
+          "inputPrice": 0.01,
+          "outputPrice": 0.01,
+          "unit": "千tokens"
+        },
+        {
+          "name": "ABAB-6.5-chat",
+          "inputPrice": 0.015,
+          "outputPrice": 0.015,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "Starter",
+          "monthly": 29,
+          "quarterly": null,
+          "yearly": 290,
+          "tokens": "50万tokens/月",
+          "description": "入门体验"
+        },
+        {
+          "name": "Plus",
+          "monthly": 49,
+          "quarterly": null,
+          "yearly": 490,
+          "tokens": "200万tokens/月",
+          "description": "日常开发"
+        },
+        {
+          "name": "Max",
+          "monthly": 119,
+          "quarterly": null,
+          "yearly": null,
+          "tokens": "500万tokens/月",
+          "description": "专业开发"
+        }
+      ]
+    },
+    {
+      "id": "stepfun",
+      "name": "阶跃星辰",
+      "category": "新锐公司",
+      "website": "https://stepfun.com",
+      "models": [
+        {
+          "name": "Step-1-V",
+          "inputPrice": 0.1,
+          "outputPrice": 0.1,
+          "unit": "百万tokens"
+        },
+        {
+          "name": "Step-1",
+          "inputPrice": 0.02,
+          "outputPrice": 0.04,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "个人版",
+          "monthly": 99,
+          "quarterly": 267,
+          "yearly": 950,
+          "tokens": "50万tokens/月",
+          "description": "个人开发者"
+        },
+        {
+          "name": "专业版",
+          "monthly": 399,
+          "quarterly": 1077,
+          "yearly": 3830,
+          "tokens": "500万tokens/月",
+          "description": "专业开发"
+        },
+        {
+          "name": "企业版",
+          "monthly": 1599,
+          "quarterly": 4317,
+          "yearly": 15350,
+          "tokens": "5000万tokens/月",
+          "description": "企业应用"
+        }
+      ]
+    },
+    {
+      "id": "lingyi",
+      "name": "零一万物",
+      "category": "新锐公司",
+      "website": "https://www.01.ai",
+      "models": [
+        {
+          "name": "Yi-34B-Chat",
+          "inputPrice": 0.02,
+          "outputPrice": 0.03,
+          "unit": "千tokens"
+        },
+        {
+          "name": "Yi-6B-Chat",
+          "inputPrice": 0.015,
+          "outputPrice": 0.025,
+          "unit": "千tokens"
+        }
+      ],
+      "plans": [
+        {
+          "name": "基础版",
+          "monthly": 79,
+          "quarterly": 213,
+          "yearly": 758,
+          "tokens": "100万tokens/月",
+          "description": "入门体验"
+        },
+        {
+          "name": "进阶版",
+          "monthly": 299,
+          "quarterly": 807,
+          "yearly": 2870,
+          "tokens": "1000万tokens/月",
+          "description": "日常开发"
+        },
+        {
+          "name": "专业版",
+          "monthly": 1199,
+          "quarterly": 3237,
+          "yearly": 11510,
+          "tokens": "1亿tokens/月",
+          "description": "企业级"
+        }
+      ]
+    },
+    {
+      "id": "sensenova",
+      "name": "商汤日日新",
+      "category": "新锐公司",
+      "website": "https://sensenova.cn",
+      "models": [
+        {
+          "name": "商量",
+          "inputPrice": 0.01,
+          "outputPrice": 0.02,
+          "unit": "千tokens"
+        },
+        {
+          "name": "秒画",
+          "inputPrice": 0.05,
+          "outputPrice": 0.05,
+          "unit": "张"
+        }
+      ],
+      "plans": [
+        {
+          "name": "基础包",
+          "monthly": 59,
+          "quarterly": 159,
+          "yearly": 566,
+          "tokens": "100万tokens/月",
+          "description": "基础体验"
+        },
+        {
+          "name": "标准包",
+          "monthly": 229,
+          "quarterly": 618,
+          "yearly": 2198,
+          "tokens": "500万tokens/月",
+          "description": "日常使用"
+        },
+        {
+          "name": "高级包",
+          "monthly": 899,
+          "quarterly": 2427,
+          "yearly": 8630,
+          "tokens": "5000万tokens/月",
+          "description": "专业场景"
+        }
+      ]
+    }
+  ]
+}

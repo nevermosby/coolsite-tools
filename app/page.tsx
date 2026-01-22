@@ -7,6 +7,7 @@ import {
   Binary,
   ArrowRight,
   Globe,
+  Server,
 } from "lucide-react";
 import {
   Card,
@@ -24,6 +25,13 @@ const tools = [
     href: "/tools/ip-calculator",
     icon: Globe,
     color: "text-amber-500",
+  },
+  {
+    title: "大模型 Coding Plan 套餐价格对比",
+    "description": "对比智谱 GLM Coding、MiniMax 等主流大模型编程套餐价格。",
+    href: "/tools/llm-pricing",
+    icon: Server,
+    color: "text-cyan-500",
   },
   {
     title: "JSON 格式化",
