@@ -35,21 +35,11 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <head>
-        {/* Google AdSense - 使用 dangerouslySetInnerHTML 避免 Next.js 添加额外属性 */}
+        {/* Google AdSense - 使用原生 script 标签避免 Next.js 添加额外属性 */}
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
           crossOrigin="anonymous"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "${ADSENSE_CLIENT_ID}",
-                enable_page_level_ads: true
-              });
-            `,
-          }}
         />
 
         {/* Google tag */}
