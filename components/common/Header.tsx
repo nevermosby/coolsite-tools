@@ -20,6 +20,14 @@ export function Header() {
             >
               关于我们
             </Link>
+            <a
+              href="https://kernelreload.club/wordpress/ebpf%e5%ad%a6%e4%b9%a0%e6%95%99%e7%a8%8b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              eBPF 学习
+            </a>
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
