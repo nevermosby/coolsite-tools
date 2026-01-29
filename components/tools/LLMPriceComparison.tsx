@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslations } from 'next-intl';
 import { ExternalLink, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,7 +58,8 @@ interface PlanEntry {
   originalQuarterly?: number;
 }
 
-export default function LLMPriceComparison() {
+export default function LLMPriceComparison({locale}: {locale: string}) {
+  const t = useTranslations('LLMPriceComparison');
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [planSortField, setPlanSortField] = useState<SortField>("monthly");
@@ -141,7 +143,7 @@ export default function LLMPriceComparison() {
   };
 
   const getCategoryColor = (category: string) => {
-    return category === "头部厂商"
+    return category === "头部厂商" || category === "Major Providers"
       ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
       : "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300";
   };
@@ -155,7 +157,7 @@ export default function LLMPriceComparison() {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="搜索服务商或套餐..."
+                placeholder={t('searchPlaceholder')}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-10"
@@ -165,12 +167,12 @@ export default function LLMPriceComparison() {
               <Filter className="h-4 w-4 text-muted-foreground" />
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger className="w-[160px]">
-                  <SelectValue placeholder="选择类别" />
+                  <SelectValue placeholder={t('categoryLabel')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">全部</SelectItem>
-                  <SelectItem value="头部厂商">头部厂商</SelectItem>
-                  <SelectItem value="新锐公司">新锐公司</SelectItem>
+                  <SelectItem value="all">{t('all')}</SelectItem>
+                  <SelectItem value="头部厂商">{t('topProviders')}</SelectItem>
+                  <SelectItem value="新锐公司">{t('emergingCompanies')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -183,24 +185,24 @@ export default function LLMPriceComparison() {
         <Card>
           <CardContent className="py-4 text-center">
             <div className="text-2xl font-bold">{pricingData.providers.length}</div>
-            <div className="text-sm text-muted-foreground">服务商数量</div>
+            <div className="text-sm text-muted-foreground">{t('stats.providers')}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="py-4 text-center">
             <div className="text-2xl font-bold">{planEntries.length}</div>
-            <div className="text-sm text-muted-foreground">套餐数量</div>
+            <div className="text-sm text-muted-foreground">{t('stats.plans')}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="py-4 text-center">
             <div className="text-2xl font-bold">{filteredPlans.length}</div>
-            <div className="text-sm text-muted-foreground">当前显示</div>
+            <div className="text-sm text-muted-foreground">{t('stats.currentDisplay')}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="py-4 text-center">
-            <div className="text-sm text-muted-foreground mb-1">数据更新时间</div>
+            <div className="text-sm text-muted-foreground mb-1">{t('stats.lastUpdated')}</div>
             <div className="text-lg font-medium">{pricingData.lastUpdated}</div>
           </CardContent>
         </Card>
@@ -211,19 +213,19 @@ export default function LLMPriceComparison() {
         <CardContent className="py-3">
           <div className="flex items-center gap-3">
             <div className="px-2 py-1 bg-red-500 text-white text-xs font-bold rounded">
-              跨年特惠
+              {t('promo.title')}
             </div>
             <div className="flex-1">
               <span className="text-sm font-medium text-red-700 dark:text-red-300">
-                智谱 GLM Coding 限时特惠
+                {t('promo.subtitle')}
               </span>
               <span className="text-xs text-red-600 dark:text-red-400 ml-2">
-                12.08 - 01.31：首购立减 50% + 额外节日限定优惠
+                {t('promo.dateRange')}
               </span>
             </div>
             <Button variant="outline" size="sm" asChild className="border-red-300 text-red-600 hover:bg-red-100 dark:border-red-700">
               <a href="https://bigmodel.cn/glm-coding" target="_blank" rel="noopener noreferrer">
-                立即抢购
+                {t('promo.cta')}
               </a>
             </Button>
           </div>
@@ -233,10 +235,10 @@ export default function LLMPriceComparison() {
       {/* Sort Controls */}
       <Card>
         <CardContent className="py-3">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <span className="text-sm font-medium flex items-center gap-2">
               <ArrowUpDown className="h-4 w-4" />
-              价格排序：
+              {t('sortLabel')}
             </span>
             <div className="flex gap-2">
               <Button
@@ -245,7 +247,7 @@ export default function LLMPriceComparison() {
                 onClick={() => handlePlanSort("monthly")}
                 className="gap-1"
               >
-                包月
+                {t('monthly')}
                 <PlanSortIcon field="monthly" />
               </Button>
               <Button
@@ -254,7 +256,7 @@ export default function LLMPriceComparison() {
                 onClick={() => handlePlanSort("quarterly")}
                 className="gap-1"
               >
-                包季
+                {t('quarterly')}
                 <PlanSortIcon field="quarterly" />
               </Button>
               <Button
@@ -263,19 +265,19 @@ export default function LLMPriceComparison() {
                 onClick={() => handlePlanSort("yearly")}
                 className="gap-1"
               >
-                包年
+                {t('yearly')}
                 <PlanSortIcon field="yearly" />
               </Button>
             </div>
             <span className="text-xs text-muted-foreground ml-auto">
-              {planSortDirection === "asc" ? "从低到高" : "从高到低"}
+              {planSortDirection === "asc" ? t('sortDirection.asc') : t('sortDirection.desc')}
             </span>
           </div>
         </CardContent>
       </Card>
 
       {/* Plans Grid */}
-      {filteredPlans.length > 0 ? (
+      {sortedPlans.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {sortedPlans.map((plan) => (
             <Card key={`${plan.providerId}-${plan.planName}`} className="hover:shadow-md transition-shadow">
@@ -283,18 +285,18 @@ export default function LLMPriceComparison() {
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-semibold">{plan.provider}</span>
                   <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(plan.category)}`}>
-                    {plan.category}
+                    {plan.category === "头部厂商" ? t('topProviders') : t('emergingCompanies')}
                   </span>
                 </div>
                 <div className="text-lg font-bold mb-2">{plan.planName}</div>
                 <div className="text-sm text-muted-foreground mb-4">{plan.description}</div>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
-                    <span className="text-sm text-muted-foreground">包月</span>
+                    <span className="text-sm text-muted-foreground">{t('monthly')}</span>
                     <span className="font-mono font-medium">{formatCurrency(plan.monthly)}</span>
                   </div>
                   <div className="flex justify-between items-center p-2 bg-muted/50 rounded relative">
-                    <span className="text-sm text-muted-foreground">包季</span>
+                    <span className="text-sm text-muted-foreground">{t('quarterly')}</span>
                     <div className="flex items-center gap-2">
                       {plan.firstDiscount && (
                         <span className="text-xs text-red-500 font-medium">{plan.firstDiscount}</span>
@@ -305,7 +307,7 @@ export default function LLMPriceComparison() {
                     </div>
                   </div>
                   <div className="flex justify-between items-center p-2 bg-green-50 dark:bg-green-950/30 rounded border border-green-100 dark:border-green-800">
-                    <span className="text-sm text-green-700 dark:text-green-300 font-medium">包年</span>
+                    <span className="text-sm text-green-700 dark:text-green-300 font-medium">{t('yearly')}</span>
                     <span className="font-mono font-bold text-green-600 dark:text-green-400">
                       {plan.yearly ? formatCurrency(plan.yearly) : '-'}
                     </span>
@@ -313,16 +315,17 @@ export default function LLMPriceComparison() {
                 </div>
                 {plan.firstDiscount && (
                   <div className="mb-3 px-2 py-1 bg-red-50 dark:bg-red-950/30 rounded text-xs text-red-600 dark:text-red-400 font-medium">
-                    特惠：{plan.firstDiscount}
-                    {plan.originalQuarterly && `（原价 ${formatCurrency(plan.originalQuarterly)}/季）`}
+                    {t('discount')}
+                    {plan.firstDiscount}
+                    {plan.originalQuarterly && ` ${t('originalPrice', {price: formatCurrency(plan.originalQuarterly)})}`}
                   </div>
                 )}
                 <div className="text-xs text-muted-foreground mb-4">
-                  权益：{plan.tokens}
+                  {t('benefits')} {plan.tokens}
                 </div>
                 <Button variant="outline" className="w-full" asChild>
                   <a href={plan.website} target="_blank" rel="noopener noreferrer">
-                    了解详情
+                    {t('learnMore')}
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
                 </Button>
@@ -333,14 +336,14 @@ export default function LLMPriceComparison() {
       ) : (
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
-            没有找到匹配的结果
+            {t('noResults')}
           </CardContent>
         </Card>
       )}
 
       {/* Disclaimer */}
       <p className="text-xs text-muted-foreground text-center">
-        * 价格信息仅供参考，实际价格请以各服务商官方页面为准。数据更新时间：{pricingData.lastUpdated}
+        {t('disclaimer', {date: pricingData.lastUpdated})}
       </p>
     </div>
   );

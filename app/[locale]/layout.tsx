@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { Suspense } from "react";
 
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import GoogleTagListener from "@/components/analytics/GoogleTagListener";
+import {getMessages} from 'next-intl/server';
+import {NextIntlClientProvider} from 'next-intl';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,21 +21,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "在线实用工具箱 | Online Utilities",
-  description:
-    "免费在线工具集合：JSON格式化, 图片转换, 密码生成, 字数统计等。Free online tools including JSON formatter, image converter, password generator.",
+  title: "Online Utilities | Free Developer & Office Tools",
+  description: "Free online tools: JSON formatter, image converter, password generator, word counter and more. All tools run locally in your browser.",
 };
 
 const GTAG_ID = process.env.NEXT_PUBLIC_GTAG_ID!;
 const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID!;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const messages = await getMessages({locale});
+  const navTranslations = messages.Nav as {home: string; about: string; ebpf: string};
+
   return (
-    <html lang="zh-CN">
+    <html lang={locale}>
       <head>
         {/* Google AdSense - 使用原生 script 标签避免 Next.js 添加额外属性 */}
         <script
@@ -63,18 +70,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col font-sans`}
       >
-        {/* GA 路由监听（必须在 body 中） */}
-        <Suspense fallback={null}>
-          <GoogleTagListener />
-        </Suspense>
+        <NextIntlClientProvider messages={messages}>
+          {/* GA 路由监听（必须在 body 中） */}
+          <Suspense fallback={null}>
+            <GoogleTagListener />
+          </Suspense>
 
-        <Header />
+          <Header translations={navTranslations} />
 
-        <main className="flex-1 container mx-auto px-4 py-8">
-          {children}
-        </main>
+          <main className="flex-1 container mx-auto px-4 py-8">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer locale={locale} />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

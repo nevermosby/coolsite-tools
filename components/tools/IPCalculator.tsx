@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from 'next-intl';
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -93,7 +94,8 @@ function formatNumber(num: number): string {
   return num.toLocaleString();
 }
 
-export default function IPCalculator() {
+export default function IPCalculator({locale}: {locale: string}) {
+  const t = useTranslations('IPCalculator');
   const [cidr, setCidr] = useState("192.168.1.0/24");
   const [result, setResult] = useState<IPResult | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
@@ -144,15 +146,15 @@ export default function IPCalculator() {
           <div className="space-y-4">
             <div>
               <Label htmlFor="cidr" className="text-base">
-                输入 CIDR 地址
+                {t('inputLabel')}
               </Label>
-              <p className="text-sm text-muted-foreground mt-1">例如: 192.168.1.0/24, 10.0.0.0/8, 172.16.0.0/12</p>
+              <p className="text-sm text-muted-foreground mt-1">{t('inputHint')}</p>
             </div>
             <Input
               id="cidr"
               value={cidr}
               onChange={(e) => setCidr(e.target.value)}
-              placeholder="例如: 192.168.1.0/24"
+              placeholder={t('inputPlaceholder')}
               className="font-mono text-lg"
             />
           </div>
@@ -167,24 +169,24 @@ export default function IPCalculator() {
             {result.privateNetwork && (
               <div className="mb-6">
                 <span className="px-2 py-1 rounded text-sm font-medium bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">
-                  私有网络
+                  {t('privateNetwork')}
                 </span>
               </div>
             )}
 
             {/* Main Results */}
             <div className="grid gap-4 md:grid-cols-2">
-              <ResultItem label="网络地址" value={result.networkAddress} field="network" />
-              <ResultItem label="广播地址" value={result.broadcastAddress} field="broadcast" />
-              <ResultItem label="子网掩码" value={result.subnetMask} field="mask" />
-              <ResultItem label="可用主机范围" value={`${result.firstUsable} - ${result.lastUsable}`} field="range" />
-              <ResultItem label="总主机数" value={formatNumber(result.totalHosts)} field="total" monospace={false} />
-              <ResultItem label="可用主机数" value={formatNumber(result.usableHosts)} field="usable" monospace={false} />
+              <ResultItem label={t('results.networkAddress')} value={result.networkAddress} field="network" />
+              <ResultItem label={t('results.broadcastAddress')} value={result.broadcastAddress} field="broadcast" />
+              <ResultItem label={t('results.subnetMask')} value={result.subnetMask} field="mask" />
+              <ResultItem label={t('results.usableHostRange')} value={`${result.firstUsable} - ${result.lastUsable}`} field="range" />
+              <ResultItem label={t('results.totalHosts')} value={formatNumber(result.totalHosts)} field="total" monospace={false} />
+              <ResultItem label={t('results.usableHosts')} value={formatNumber(result.usableHosts)} field="usable" monospace={false} />
             </div>
 
             {/* Binary View */}
             <div className="mt-6 pt-6 border-t">
-              <Label className="text-base mb-3 block">二进制子网掩码</Label>
+              <Label className="text-base mb-3 block">{t('results.binarySubnetMask')}</Label>
               <code className="font-mono text-sm bg-muted p-3 rounded block overflow-x-auto whitespace-nowrap">
                 {result.binarySubnetMask}
               </code>
@@ -196,7 +198,7 @@ export default function IPCalculator() {
       {!result && cidr && (
         <Card className="border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-800">
           <CardContent className="py-6 text-center text-red-600 dark:text-red-400">
-            请输入有效的 CIDR 地址 (例如: 192.168.1.0/24)
+            {t('error')}
           </CardContent>
         </Card>
       )}
